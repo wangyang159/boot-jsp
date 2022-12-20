@@ -17,17 +17,18 @@
     </select>
 
     <resultMap id="fileBlockMap" type="com.wy.bootjsp.bean.FileBlock">
+        <id column="id" property="id"></id>
         <result column="blockpathname" property="blockPathName" />
         <result column="blockindex" property="blockIndex" />
     </resultMap>
 
     <select id="getFileBlocksPath" resultMap="fileBlockMap">
-        select blockpathname,blockindex from blockmeg where filemd5=#{fileMd5}
+        select id,blockpathname,blockindex from blockmeg where filemd5=#{fileMd5}
     </select>
 
     <insert id="insertFileMeg">
-        insert into filemeg(filemd5,fileblocksize,filename,pathname,filesize) value(
-            #{fileMd5},#{fileBlockSize},#{fileName},#{pathName},#{fileSize}
+        insert into filemeg(id,filemd5,fileblocksize,filename,pathname,filesize) values(
+            #{id},#{fileMd5},#{fileBlockSize},#{fileName},#{pathName},#{fileSize}
         )
     </insert>
 

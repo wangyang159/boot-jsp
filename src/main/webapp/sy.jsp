@@ -41,7 +41,7 @@
             let fileblock_index = 0;
             //document获取文件
             const file = e.target.files[0];
-            const sliceLength = 9;
+            const sliceLength = 5;
             const chunkSize = Math.ceil(file.size / sliceLength);
             const fileReader = new FileReader();
             const md5 = new SparkMD5();

@@ -4,7 +4,6 @@ import com.wy.bootjsp.bean.FileBlock;
 import com.wy.bootjsp.bean.FileMeg;
 import com.wy.bootjsp.mapper.FileBlockMapper;
 import com.wy.bootjsp.service.FileBlockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -97,12 +96,12 @@ public class FileBlockSerivceImpl implements FileBlockService {
 
             //循环读取要合并的文件集合
             for(File f : files) {
-                byte[] buf = new byte[10240];
+                byte[] buf = new byte[1024];
                 int len = 0;
                 in = new FileInputStream(f);
                 while ((len = in.read(buf)) != -1) {
                     //写出数据
-                    out.write(buf, 0, len);
+                    out.write(buf);
                 }
                 //写完之后把片文件的输入流关掉
                 if (in != null) {

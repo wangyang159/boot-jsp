@@ -10,15 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,7 +22,7 @@ import java.util.List;
  * &nbsp;&nbsp;&nbsp;&nbsp;TestContrller
  */
 @Controller
-public class TestContrller {
+public class FileUploadContrller {
 
     @Resource
     private FileBlockService fileBlockService;
@@ -90,7 +84,9 @@ public class TestContrller {
      */
     @RequestMapping("/allhb")
     @ResponseBody
-    public Boolean allhb(String fileMd5,long fileSize,String fileName){
+    public Boolean allhb(String fileMd5,long fileSize,String fileName) throws InterruptedException {
+        Thread.sleep(1000);
+
         //先查出所有文件片路径信息
         List<FileBlock> fileBlocksPath = fileBlockService.getFileBlocksPath(fileMd5);
 
@@ -101,7 +97,7 @@ public class TestContrller {
             //下标要减一，因为片文件保存的时候是从1开始的
             fileBlocks[f.getBlockIndex()-1] = new File(f.getBlockPathName());
         }
-
+        System.out.println("查到的文件数"+fileBlocksPath.size()+"--------------%%%%%%%%%%%%%%%%%%%%%%%%-------------拿到的文件数"+fileBlocks.length);
         //合并这些文件,注意保存文件的时候文件名主体使用md5
         String savePath = fileBlockService.allhb(fileBlocks, fileMd5 + "." + fileName.split("\\.")[1]);
 

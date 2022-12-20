@@ -1,5 +1,8 @@
 package com.wy.bootjsp.bean;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 /**
  * 作者: wangyang <br/>
  * 创建时间: 2022/12/20 <br/>
@@ -7,6 +10,12 @@ package com.wy.bootjsp.bean;
  * &nbsp;&nbsp;&nbsp;&nbsp;FileMeg 结果文件
  */
 public class FileMeg {
+    /**
+     * 数据id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
     /**
      * 文件的md5信息
      */
@@ -33,6 +42,14 @@ public class FileMeg {
     private Long fileSize;
 
     public FileMeg() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFileMd5() {
@@ -78,7 +95,8 @@ public class FileMeg {
     @Override
     public String toString() {
         return "FileMeg{" +
-                "fileMd5='" + fileMd5 + '\'' +
+                "id=" + id +
+                ", fileMd5='" + fileMd5 + '\'' +
                 ", fileBlockSize=" + fileBlockSize +
                 ", fileName='" + fileName + '\'' +
                 ", pathName='" + pathName + '\'' +
