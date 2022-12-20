@@ -85,6 +85,10 @@ public class FileUploadContrller {
     @RequestMapping("/allhb")
     @ResponseBody
     public Boolean allhb(String fileMd5,long fileSize,String fileName) throws InterruptedException {
+        /*
+        等待一秒防止前面切面并行上传的结果没有完全落库完成
+        如果不等，则会因为切面的上传是异步+并行，而导致查询不到所有的切片信息
+         */
         Thread.sleep(1000);
 
         //先查出所有文件片路径信息
@@ -97,7 +101,6 @@ public class FileUploadContrller {
             //下标要减一，因为片文件保存的时候是从1开始的
             fileBlocks[f.getBlockIndex()-1] = new File(f.getBlockPathName());
         }
-        System.out.println("查到的文件数"+fileBlocksPath.size()+"--------------%%%%%%%%%%%%%%%%%%%%%%%%-------------拿到的文件数"+fileBlocks.length);
         //合并这些文件,注意保存文件的时候文件名主体使用md5
         String savePath = fileBlockService.allhb(fileBlocks, fileMd5 + "." + fileName.split("\\.")[1]);
 
