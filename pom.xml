@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.wy</groupId>
 	<artifactId>boot-jsp</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 	<name>boot-jsp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

@@ -87,7 +87,8 @@ public class FileUploadContrller {
     public Boolean allhb(String fileMd5,long fileSize,String fileName) throws InterruptedException {
         /*
         等待一秒防止前面切面并行上传的结果没有完全落库完成
-        如果不等，则会因为切面的上传是异步+并行，而导致查询不到所有的切片信息
+        如果不等，则由于前面的上传是promise异步+并行，虽然使用了await，但仍然很可能少查询到n条数据，往往是最后一条
+        这一点应该是MybatisPlus本身的问题
          */
         Thread.sleep(1000);
 

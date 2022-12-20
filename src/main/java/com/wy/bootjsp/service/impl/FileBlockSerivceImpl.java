@@ -101,7 +101,7 @@ public class FileBlockSerivceImpl implements FileBlockService {
                 in = new FileInputStream(f);
                 while ((len = in.read(buf)) != -1) {
                     //写出数据
-                    out.write(buf);
+                    out.write(buf,0,len);
                 }
                 //写完之后把片文件的输入流关掉
                 if (in != null) {
