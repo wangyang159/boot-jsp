@@ -19,7 +19,7 @@ import java.util.List;
  * 作者: wangyang <br/>
  * 创建时间: 2022/12/18 <br/>
  * 描述: <br/>
- * &nbsp;&nbsp;&nbsp;&nbsp;TestContrller
+ * &nbsp;&nbsp;&nbsp;&nbsp;处理文件上传的控制器类
  */
 @Controller
 public class FileUploadContrller {
